@@ -1,5 +1,6 @@
-// Importing Express
+// Importing Libraries
 const express = require("express");
+const mongoose = require("mongoose");
 
 // Inititating/Running Express
 const app = express();
@@ -12,6 +13,21 @@ app.set("view engine", "ejs");
 
 // Environment Variables (Dotenv)
 require("dotenv").config();
+
+// Connecting to Database
+mongoose
+  .connect(process.env.dbURL)
+  .then((res) => {
+    console.log("Connected to Database...");
+    // Listening on a port
+    app.listen(3000 || process.env.PORT, () => {
+      console.log("Server running...");
+    });
+  })
+  .catch((err) => {
+    console.log("Couldn't connect to the Database...");
+    console.error(err);
+  });
 
 // Blogs Array
 const blogsArray = [
@@ -70,9 +86,4 @@ app.get("/details/:id", (req, res) => {
 app.use((req, res) => {
   // Setting the response code to 404, which means 'Not Found'
   res.status(404).render("error");
-});
-
-// Listening on a port
-app.listen(process.env.PORT, () => {
-  console.log("Server running...");
 });
