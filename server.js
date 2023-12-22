@@ -10,6 +10,9 @@ app.use(express.static("views"));
 // Template Engine
 app.set("view engine", "ejs");
 
+// Environment Variables (Dotenv)
+require("dotenv").config();
+
 // Blogs Array
 const blogsArray = [
   {
@@ -69,7 +72,7 @@ app.use((req, res) => {
   res.status(404).render("error");
 });
 
-// Listening on a port (3000)
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
+// Listening on a port
+app.listen(process.env.PORT, () => {
+  console.log("Server running...");
 });
