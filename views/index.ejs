@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container my-5">
+      <h1>Welcome to Backend Blogger</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
+        facere ut accusamus, veritatis labore autem maxime minima unde quia
+        libero?
+      </p>
+      <div class="blogs mt-4">
+        <% blogs.forEach(blog => { %>
+        <div class="blog border rounded p-3">
+          <h2><%= blog.title %></h2>
+          <p>- By <%= blog.author %></p>
+          <p><%= blog.summary %></p>
+          <a href="/details/<%= blog.id %>" class="btn btn-primary">Read More</a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
